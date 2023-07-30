@@ -21,5 +21,6 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v3
-      - name: test_step
-        run: echo hello ${{ matrix.board_name }}
+      - name: build artifacts
+        run: ./docker-build.sh boards
+        # run: ./docker-build.sh ${{ matrix.board_name }}
