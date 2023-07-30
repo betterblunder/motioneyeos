@@ -27,4 +27,4 @@ if [ "${CONTAINER_NAME}" = "" ]; then
   CONTAINER_NAME="${IMAGE_NAME}-${RANDOM}"
 fi
 
-docker run --rm --name "${CONTAINER_NAME}" --mount type=bind,src=${PWD},target=/build -it "${IMAGE_NAME}" ./build.sh "$@"
+docker run --rm --name "${CONTAINER_NAME}" --mount type=bind,src=${PWD},target=/build "${IMAGE_NAME}" ./build.sh "$@"

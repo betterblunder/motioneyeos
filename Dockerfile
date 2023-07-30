@@ -37,4 +37,4 @@ USER build
 WORKDIR /build
 
 # container just waits, by default, actual builds can be done with `docker exec`
-# CMD /bin/bash -c 'for ((i = 0; ; i++)); do sleep 100; done'
+CMD /bin/bash -c 'for ((i = 0; ; i++)); do sleep 100; done'
