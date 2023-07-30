@@ -13,8 +13,6 @@ if [ -z "${IMG_DIR}" ] || [ -z "${BOARD}" ]; then
     exit 1
 fi
 
-test "root" != "${USER}" && exec sudo -E $0 "$@"
-
 function msg() {
     echo " * $1"
 }
