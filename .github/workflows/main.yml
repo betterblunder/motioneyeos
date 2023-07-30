@@ -21,4 +21,5 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v3
-      - run: echo hello ${{ matrix.version }}
+      - name: test_step
+        uses: echo hello ${{ matrix.board_name }}
