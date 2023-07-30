@@ -14,7 +14,6 @@ jobs:
       - name: Build the hello-docker Docker image
         run: |
           docker build . --tag ghcr.io/${{ github.actor }}/motioneyeos-builder:latest
-          docker run ghcr.io/${{ github.actor }}/motioneyeos-builder:latest
           docker push ghcr.io/${{ github.actor }}/motioneyeos-builder:latest
 
   build-board-images:
