@@ -2,7 +2,7 @@ diff --git a/Makefile b/Makefile
 index e69de29..fb3f2bf 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -0,0 +1,54 @@
+@@ -0,0 +1,57 @@
 +ifneq ($(SRC),)
 +VPATH=$(SRC)
 +endif
