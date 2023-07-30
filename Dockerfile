@@ -31,10 +31,3 @@ RUN \
     useradd -ms /bin/bash build && \
     mkdir -p /build && \
     chown -R build:build  /build
-
-USER build
-
-WORKDIR /build
-
-# container just waits, by default, actual builds can be done with `docker exec`
-CMD /bin/bash -c 'for ((i = 0; ; i++)); do sleep 100; done'
