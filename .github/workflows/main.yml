@@ -68,7 +68,7 @@ jobs:
       - name: build artifacts
         run: ./docker-build.sh -i ghcr.io/${{ github.actor }}/motioneyeos-builder:latest ${{ matrix.board_name }}
       - name: generate release images
-        run: sudo ./build.sh boards
+        run: sudo ./build.sh ${{ matrix.board_name }} mkrelease
       - name: upload generated images
         uses: actions/upload-artifact@v3
         with:
