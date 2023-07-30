@@ -3,7 +3,7 @@ IMAGE_NAME=motioneyeos-builder
 CONTAINER_NAME=""
 SHOW_USAGE=false
 
-./build-docker.sh
+# ./build-docker.sh
 
 while true
 do
