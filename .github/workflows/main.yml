@@ -1,22 +1,24 @@
 name: Build Board Images
 on: [push]
 jobs:
-  build-images:       
+  build-images:
     strategy:
       matrix:
         board_name:
-#           - bananapim1
-#           - nanopineo2
-#           - nanopineo
-#           - nanopir1
-#           - odroidxu4
-#           - orangepione
-#           - orangepizero
-#           - raspberrypi2
-#           - raspberrypi3
+          #           - bananapim1
+          #           - nanopineo2
+          #           - nanopineo
+          #           - nanopir1
+          #           - odroidxu4
+          #           - orangepione
+          #           - orangepizero
+          #           - raspberrypi2
+          #           - raspberrypi3
           - raspberrypi4
-#           - raspberrypi
-#           - tinkerboard
+          #           - raspberrypi
+          #           - tinkerboard
     runs-on: ubuntu-latest
     steps:
-      - run: echo "hello ${{ matrix.version }}"
+      - name: checkout
+        uses: actions/checkout@v3
+      - run: echo hello ${{ matrix.version }}
