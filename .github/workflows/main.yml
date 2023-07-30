@@ -50,6 +50,8 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - name: get docker image
+        run: docker pull ghcr.io/${{ github.actor }}/motioneyeos-builder:latest
       - name: build artifacts
         run: ./docker-build.sh boards
         # run: ./docker-build.sh -i ghcr.io/${{ github.actor }}/motioneyeos-builder:latest ${{ matrix.board_name }}
