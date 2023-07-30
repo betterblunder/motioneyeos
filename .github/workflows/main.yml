@@ -22,4 +22,4 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
       - name: test_step
-        uses: echo hello ${{ matrix.board_name }}
+        run: echo hello ${{ matrix.board_name }}
