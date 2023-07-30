@@ -50,6 +50,14 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v3
+      - name: Cache Build Output # might be a bad idea
+        uses: actions/cache@v3
+        with:
+          path: |
+            output
+            dl
+            .buildroot-ccache-${{ matrix.board_name }}
+          key: build_cache-${{ matrix.board_name }}
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
         with:
