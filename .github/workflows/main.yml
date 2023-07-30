@@ -24,7 +24,10 @@ jobs:
       - name: build artifacts
         run: ./docker-build.sh boards
         # run: ./docker-build.sh ${{ matrix.board_name }}
-      - name: generate_release_images
-        run: sudo ./build.sh boards
-
-# artifact = output/${{ matrix.board_name }}/images/...
+      - name: generate release images
+        # run: sudo ./build.sh boards
+        run: >
+          sudo mkdir -p output/${{ matrix.board_name }}/images &&
+          sudo touch output/${{ matrix.board_name }}/images/board.img &&
+          sudo touch output/${{ matrix.board_name }}/images//${{ matrix.board_name }}-foo.img &&
+          sudo touch output/${{ matrix.board_name }}/images//${{ matrix.board_name }}-foo.xz
