@@ -48,6 +48,11 @@ jobs:
     continue-on-error: true # allow boards to continue even if one fails
     runs-on: ubuntu-latest
     needs: create-build-container
+    container:
+      image: ghcr.io/${{ github.actor }}/motioneyeos-builder:latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -58,7 +63,8 @@ jobs:
             output
             dl
             .buildroot-ccache-${{ matrix.board_name }}
-          key: build_cache-${{ matrix.board_name }}
+          key: build_cache-${{ matrix.board_name }}-${{ github.sha }}
+          restore-keys: build_cache-${{ matrix.board_name }}-
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
         with:
