@@ -11,7 +11,8 @@ jobs:
         uses: actions/cache@v3
         with:
           path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ hashFiles('**/Dockerfile') }}
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-buildx-
       - name: build docker image
         run: docker build . --tag ghcr.io/${{ github.actor }}/motioneyeos-builder:latest
       - name: Login to GitHub Container Registry
@@ -21,7 +22,13 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: push docker image to registry
-        run: docker push ghcr.io/${{ github.actor }}/motioneyeos-builder:latest
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile
+          tags: ghcr.io/${{ github.actor }}/motioneyeos-builder:latest
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
 
   build-board-images:
     strategy:
@@ -50,10 +57,8 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: get docker image
-        run: docker pull ghcr.io/${{ github.actor }}/motioneyeos-builder:latest
       - name: build artifacts
-        run: ./docker-build.sh boards
+        run: ./docker-build.sh -i ghcr.io/${{ github.actor }}/motioneyeos-builder:latest boards
         # run: ./docker-build.sh -i ghcr.io/${{ github.actor }}/motioneyeos-builder:latest ${{ matrix.board_name }}
       - name: generate release images
         # run: sudo ./build.sh boards
