@@ -58,5 +58,10 @@ jobs:
         run: >
           sudo mkdir -p output/${{ matrix.board_name }}/images &&
           sudo touch output/${{ matrix.board_name }}/images/board.img &&
-          sudo touch output/${{ matrix.board_name }}/images//${{ matrix.board_name }}-foo.img &&
-          sudo touch output/${{ matrix.board_name }}/images//${{ matrix.board_name }}-foo.xz
+          sudo touch output/${{ matrix.board_name }}/images/${{ matrix.board_name }}-foo.img &&
+          sudo touch output/${{ matrix.board_name }}/images/${{ matrix.board_name }}-foo.img.xz
+      - name: upload generated images
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.board_name }} images
+          path: output/${{ matrix.board_name }}/images/*.img*
