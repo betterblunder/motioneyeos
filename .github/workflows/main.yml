@@ -40,7 +40,7 @@ jobs:
           #           - orangepione
           #           - orangepizero
           #           - raspberrypi2
-          #           - raspberrypi3
+          - raspberrypi3
           - raspberrypi4
           #           - raspberrypi
           #           - tinkerboard
@@ -56,15 +56,9 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: build artifacts
-        run: ./docker-build.sh -i ghcr.io/${{ github.actor }}/motioneyeos-builder:latest boards
-        # run: ./docker-build.sh -i ghcr.io/${{ github.actor }}/motioneyeos-builder:latest ${{ matrix.board_name }}
+        run: ./docker-build.sh -i ghcr.io/${{ github.actor }}/motioneyeos-builder:latest ${{ matrix.board_name }}
       - name: generate release images
-        # run: sudo ./build.sh boards
-        run: >
-          sudo mkdir -p output/${{ matrix.board_name }}/images &&
-          sudo touch output/${{ matrix.board_name }}/images/board.img &&
-          sudo touch output/${{ matrix.board_name }}/images/${{ matrix.board_name }}-foo.img &&
-          sudo touch output/${{ matrix.board_name }}/images/${{ matrix.board_name }}-foo.img.xz
+        run: sudo ./build.sh boards
       - name: upload generated images
         uses: actions/upload-artifact@v3
         with:
