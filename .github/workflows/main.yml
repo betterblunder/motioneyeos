@@ -51,7 +51,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: build artifacts
-        run: ./docker-build.sh -i ghcr.io/${{ github.actor }}/motioneyeos-builder:latest boards
+        run: ./docker-build.sh boards
         # run: ./docker-build.sh -i ghcr.io/${{ github.actor }}/motioneyeos-builder:latest ${{ matrix.board_name }}
       - name: generate release images
         # run: sudo ./build.sh boards
