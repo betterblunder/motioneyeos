@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-LINUX_FIRMWARE_VERSION = 20200122
+LINUX_FIRMWARE_VERSION = 20230625
 LINUX_FIRMWARE_SITE = http://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
 LINUX_FIRMWARE_SITE_METHOD = git
 
@@ -78,28 +78,43 @@ endif
 # rtl81xx
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_RTL_81XX),y)
 LINUX_FIRMWARE_FILES += \
-	rtlwifi/rtl8192cfw.bin rtlwifi/rtl8192cfwU.bin \
-	rtlwifi/rtl8192cfwU_B.bin rtlwifi/rtl8192cufw.bin \
-	rtlwifi/rtl8192defw.bin rtlwifi/rtl8192sefw.bin \
-	rtlwifi/rtl8188efw.bin rtlwifi/rtl8188eufw.bin \
+	rtlwifi/rtl8188efw.bin \
+	rtlwifi/rtl8188eufw.bin \
+	rtlwifi/rtl8188fufw.bin \
+	rtlwifi/rtl8192cfw.bin \
+	rtlwifi/rtl8192cfwU_B.bin \
+	rtlwifi/rtl8192cfwU.bin \
 	rtlwifi/rtl8192cufw_A.bin \
-	rtlwifi/rtl8192cufw_B.bin rtlwifi/rtl8192cufw_TMSC.bin \
-	rtlwifi/rtl8192eefw.bin rtlwifi/rtl8192eu_ap_wowlan.bin \
-	rtlwifi/rtl8192eu_nic.bin rtlwifi/rtl8192eu_wowlan.bin
+	rtlwifi/rtl8192cufw_B.bin \
+	rtlwifi/rtl8192cufw_TMSC.bin \
+	rtlwifi/rtl8192cufw.bin \
+	rtlwifi/rtl8192defw.bin \
+	rtlwifi/rtl8192eu_ap_wowlan.bin \
+	rtlwifi/rtl8192eu_nic.bin \
+	rtlwifi/rtl8192eu_wowlan.bin \
+	rtlwifi/rtl8192fufw.bin \
+	rtlwifi/rtl8192sefw.bin
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.rtlwifi_firmware.txt
 endif
 
 # rtl87xx
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_RTL_87XX),y)
 LINUX_FIRMWARE_FILES += \
-	rtlwifi/rtl8712u.bin rtlwifi/rtl8723fw.bin \
-	rtlwifi/rtl8723fw_B.bin rtlwifi/rtl8723befw.bin \
-	rtlwifi/rtl8723aufw_A.bin rtlwifi/rtl8723aufw_B.bin \
-	rtlwifi/rtl8723aufw_B_NoBT.bin rtlwifi/rtl8723befw.bin \
-	rtlwifi/rtl8723bs_ap_wowlan.bin rtlwifi/rtl8723bs_bt.bin \
-	rtlwifi/rtl8723bs_nic.bin rtlwifi/rtl8723bs_wowlan.bin \
-	rtlwifi/rtl8723bu_ap_wowlan.bin rtlwifi/rtl8723bu_nic.bin \
-	rtlwifi/rtl8723bu_wowlan.bin
+	rtlwifi/rtl8710bufw_SMIC.bin \
+	rtlwifi/rtl8710bufw_UMC.bin \
+	rtlwifi/rtl8712u.bin \
+	rtlwifi/rtl8723aufw_A.bin \
+	rtlwifi/rtl8723aufw_B_NoBT.bin \
+	rtlwifi/rtl8723aufw_B.bin \
+	rtlwifi/rtl8723befw_36.bin \
+	rtlwifi/rtl8723befw.bin \
+	rtlwifi/rtl8723bs_bt.bin \
+	rtlwifi/rtl8723bu_ap_wowlan.bin \
+	rtlwifi/rtl8723bu_nic.bin \
+	rtlwifi/rtl8723bu_wowlan.bin \
+	rtlwifi/rtl8723defw.bin \
+	rtlwifi/rtl8723fw_B.bin \
+	rtlwifi/rtl8723fw.bin
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.rtlwifi_firmware.txt
 endif
 
@@ -282,7 +297,7 @@ endif
 
 # MT7601
 ifeq ($(BR2_PACKAGE_LINUX_FIRMWARE_MEDIATEK_MT7601U),y)
-LINUX_FIRMWARE_FILES += mt7601u.bin
+LINUX_FIRMWARE_FILES += mediatek/mt7601u.bin
 LINUX_FIRMWARE_ALL_LICENSE_FILES += LICENCE.ralink_a_mediatek_company_firmware
 endif
 

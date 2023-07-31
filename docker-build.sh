@@ -3,6 +3,8 @@ IMAGE_NAME=motioneyeos-builder
 CONTAINER_NAME=""
 SHOW_USAGE=false
 
+# ./build-docker.sh
+
 while true
 do
   case "$1" in
@@ -22,7 +24,7 @@ if [ "${SHOW_USAGE}" = "true" ]; then
 fi
 
 if [ "${CONTAINER_NAME}" = "" ]; then
-  CONTAINER_NAME="${IMAGE_NAME}-${RANDOM}"
+  docker run --rm --user=root --mount type=bind,src=${PWD},target=/build "${IMAGE_NAME}" ./build.sh "$@"
+else
+  docker run --rm --user=root --name "${CONTAINER_NAME}" --mount type=bind,src=${PWD},target=/build "${IMAGE_NAME}" ./build.sh "$@"
 fi
-
-docker run --rm --name "${CONTAINER_NAME}" --mount type=bind,src=${PWD},target=/build -it "${IMAGE_NAME}" ./build.sh "$@"
