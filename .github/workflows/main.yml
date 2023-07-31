@@ -48,11 +48,6 @@ jobs:
     continue-on-error: true # allow boards to continue even if one fails
     runs-on: ubuntu-latest
     needs: create-build-container
-    container:
-      image: ghcr.io/${{ github.actor }}/motioneyeos-builder:latest
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: checkout
         uses: actions/checkout@v3
@@ -65,10 +60,18 @@ jobs:
             .buildroot-ccache-${{ matrix.board_name }}
           key: build_cache-${{ matrix.board_name }}-${{ github.sha }}
           restore-keys: build_cache-${{ matrix.board_name }}-
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: build artifacts
-        run: ./build.sh ${{ matrix.board_name }}
+        run: ./docker-build.sh -i ghcr.io/${{ github.actor }}/motioneyeos-builder:latest ${{ matrix.board_name }}
       - name: generate release images
-        run: ./build.sh ${{ matrix.board_name }} mkrelease
+        run: sudo ./build.sh ${{ matrix.board_name }} mkrelease
+      - name: fix artifact permissions
+        run: sudo chmod -R 777 output
       - name: upload generated images
         uses: actions/upload-artifact@v3
         with:
