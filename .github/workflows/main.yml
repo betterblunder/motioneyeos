@@ -75,5 +75,5 @@ jobs:
       - name: upload generated images
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ matrix.board_name }} images
+          name: ${{ matrix.board_name }}-images
           path: output/${{ matrix.board_name }}/images/*.img*
